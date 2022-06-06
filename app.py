@@ -33,7 +33,7 @@ def skills_id(x):
         candidates_info = json.load(f)
         skill_result = str()
         for i in candidates_info:
-            if x in i["skills"]:
+            if x.lower() in i["skills"]:
                 skill_result += '<pre>{}\nИмя кандидата: {}\nПозиция: {}\nНавыки: {}\n<pre>'.format(
                     i["picture"], i["name"], i["position"], i["skills"])
         return skill_result
