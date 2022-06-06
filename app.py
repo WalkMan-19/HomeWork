@@ -17,7 +17,6 @@ def main_page():
 
 @app.route('/candidates/<int:uid>')
 def candidate_id(uid):
-
     for i in load_json():
         if i["id"] == uid:
             return '<pre>{}\nИмя кандидата: {}\nПозиция: {}\nНавыки: {}\n<pre>'.format(
@@ -25,12 +24,13 @@ def candidate_id(uid):
 
 
 @app.route('/skills/<x>')
-def skills_id(x):
+def skill_id(x):
     skill_result = str()
     for i in load_json():
-        if x.lower() in i["skills"].lower():
-            skill_result += '<pre>{}\nИмя кандидата: {}\nПозиция: {}\nНавыки: {}\n<pre>'.format(
-                i["picture"], i["name"], i["position"], i["skills"])
+        for y in i["skills"].split(", "):
+            if x.lower() == y.lower():
+                skill_result += '<pre>{}\nИмя кандидата: {}\nПозиция: {}\nНавыки: {}\n<pre>'.format(
+                    i["picture"], i["name"], i["position"], i["skills"])
     return skill_result
 
 
